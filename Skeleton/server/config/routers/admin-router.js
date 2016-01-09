@@ -4,10 +4,10 @@ var router = require('express').Router(),
 
 router
     .get('/',function (req, res) {
-        res.render('index', {currentUser: req.user});
+        res.render('admin-index', {currentUser: req.user});
     })
     .get('*', function (req, res) {
-        res.render('index', {currentUser: req.user});
+        res.render('admin-index', {currentUser: req.user});
     });
 
 module.exports = function (app) {
