@@ -33,6 +33,11 @@ module.exports = {
             if (req.isAuthenticated() && req.user.roles.indexOf(role) > -1) {
                 next();
             }
+            else if (req.isAuthenticated() && req.user.roles.indexOf(role) <= -1) {
+                res.status(403);
+                res.redirect('/unauthorized');
+                res.end();
+            }
             else {
                 res.status(403);
                 res.redirect('/account/login');
