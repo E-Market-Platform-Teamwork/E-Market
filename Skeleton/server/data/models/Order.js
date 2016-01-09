@@ -8,6 +8,6 @@ module.exports.init = function () {
         user: { type: Schema.Types.ObjectId, ref: 'User' },
         approved: { type: Boolean, default: false }
     });
-    
-    var Order = new mongoose.model('Order', orderSchema);    
+
+    var Order = mongoose.model('Order', orderSchema);
 };

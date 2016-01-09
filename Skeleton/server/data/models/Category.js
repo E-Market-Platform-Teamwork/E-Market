@@ -9,4 +9,22 @@ module.exports.init = function () {
     });
 
     var Category = mongoose.model('Category', categorySchema);
+
+    Category.find({}).exec(function (err, collection) {
+        if (err) {
+            console.log('Cannot find users: ' + err);
+            return;
+        }
+        
+        // Seeding categories
+        if (collection.length === 0) {
+            for (var index = 1; index < 6; index++) {
+                Category.create({
+                    name: 'Category ' + index,
+                    description: 'Category ' + index + ' description',
+                    products: []
+                });
+            };
+        };
+    });
 };

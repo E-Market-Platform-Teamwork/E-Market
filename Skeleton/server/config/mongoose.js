@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
-    seeder = require('seeder'),
-    UserModel = require('../data/models/User');
+    seeder = require('seeder');
 
 module.exports = function (config) {
     mongoose.connect(config.db);
@@ -12,14 +11,14 @@ module.exports = function (config) {
             return;
         }
 
-        console.log('Database up and running...')
+        console.log('Database up and running...');
     });
 
     db.on('error', function (err) {
         console.log('Database error: ' + err);
     });
 
-    UserModel.init();
+    require('../data/models/modelsInitializer')();
 };
 
 var admin = {
