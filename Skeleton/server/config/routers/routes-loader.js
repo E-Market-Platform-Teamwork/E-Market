@@ -8,4 +8,4 @@ module.exports = function routeConfig(app) {
             var filePath = './' + file;
             require(filePath)(app)
         });
-}
+};

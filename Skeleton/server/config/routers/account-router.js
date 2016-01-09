@@ -9,6 +9,7 @@ router.get('/register', usersController.getRegister)
     .get('/logout', auth.logout)
     .get('/', function (req, res) {
         res.render('index', {currentUser: req.user});
+        console.log(req.user);
     })
     .get('*', function (req, res) {
         res.render('index', {currentUser: req.user});
@@ -16,4 +17,4 @@ router.get('/register', usersController.getRegister)
 
 module.exports = function (app) {
     app.use('/account', router);
-}
+};

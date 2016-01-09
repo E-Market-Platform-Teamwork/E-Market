@@ -14,15 +14,18 @@ html
                     li
                         a(href="/") Home
                     if (currentUser)
+                        if(currentUser.roles === 'admin')
+                            li
+                                a(href="/admin") Administration
                         li
-                            a(href="/profile") #{currentUser.username}
+                            a(href="/account/profile") #{currentUser.username}
                         li
-                            a(href="/logout") Logout
+                            a(href="/account/logout") Logout
                     else
                         li
-                            a(href="/register") Register
+                            a(href="/account/register") Register
                         li
-                            a(href="/login") Login
+                            a(href="/account/login") Login
 
         .container
             if (errorMessage)

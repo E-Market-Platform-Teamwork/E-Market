@@ -10,7 +10,7 @@ module.exports = {
 
             req.logIn(user, function (err) {
                 if (err) return next(err);
-                res.redirect('/');
+                res.redirect('/account');
             })
         });
 
@@ -18,11 +18,11 @@ module.exports = {
     },
     logout: function (req, res, next) {
         req.logout();
-        res.redirect('/');
+        res.redirect('/account');
     },
     isAuthenticated: function (req, res, next) {
         if (!req.isAuthenticated()) {
-            res.redirect('/login');
+            res.redirect('/account/login');
         }
         else {
             next();
@@ -35,6 +35,7 @@ module.exports = {
             }
             else {
                 res.status(403);
+                res.redirect('/account/login');
                 res.end();
             }
         }
