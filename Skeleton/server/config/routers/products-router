@@ -1,3 +1,11 @@
+var router = require('express').Router(),
+    controllers = require('../../controllers');
+
+router
+    .get('/', controllers.products.get)
+    .post('/add', controllers.products.add)
+    .get('/add', controllers.products.getAddForm);
+
 module.exports = function (app) {
-    app.use('/products', function(){});
-}
+    app.use('/products', router);
+};

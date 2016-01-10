@@ -1,0 +1,9 @@
+extends ../shared/layout
+block main-content
+   ul.nav.nav-pills
+   each product in products
+      li
+         .jumbotron
+            h1 #{product.name}
+            p
+               | #{product.description}
