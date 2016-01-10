@@ -10,8 +10,6 @@ block main-content
                     p
                         | #{category.description}
                     p
-                        a(href='http://localhost:3000/products/bycategory?category=#{category._id}').btn.btn-primary.btn-lg Edit
-                        a(href='http://localhost:3000/categories/remove?id=#{category._id}').btn.btn-primary.btn-lg Delete
-                        form(method="DELETE" action="http://localhost:3000/categories/remove?id=category.id")
-                            input(type="submit" value="Delete Form")
-                        button(ng-click="deleteCategory()").btn.btn-primary.btn-lg DeleteAngular
+                        a(href='#').btn.btn-primary.btn-lg Edit
+                        form()
+                            input(type="submit" ng-click="deleteCategory('#{category.id}')" value="Delete").btn.btn-primary.btn-lg
