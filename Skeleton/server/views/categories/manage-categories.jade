@@ -1,0 +1,15 @@
+extends ../shared/layout
+
+block main-content
+    ul.nav.nav-pills
+    each category in categories
+        li
+            .jumbotron
+                h1 #{category.name}
+                p
+                    | #{category.description}
+                p
+                    a(href='http://localhost:3000/products/bycategory?category=#{category._id}').btn.btn-primary.btn-lg Edit
+                    form(method="DELETE" action="http://localhost:3000/categories/remove?id=#{category._id}")
+                        // a(href='http://localhost:3000/categories/remove?id=#{category._id}').btn.btn-primary.btn-lg Delete
+                        input(type="submit" value="Delete").btn.btn-primary.btn-lg

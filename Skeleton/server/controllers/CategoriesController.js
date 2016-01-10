@@ -37,5 +37,16 @@ module.exports = {
                 res.status(404)
                     .send(err.message);
             });
+    },
+    
+    getManage: function(req, res) {
+        services.categories.getAll()
+            .then(function (dat) {
+                res.render('categories/manage-categories', { categories: dat });
+            }, function (err) {
+                res
+                    .status(404)
+                    .send(err);
+            });
     }
 };
