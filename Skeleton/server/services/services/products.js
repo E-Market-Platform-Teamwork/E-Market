@@ -26,5 +26,23 @@ module.exports = {
         });
 
         return promise;
+    },
+    removeById: function (id) {
+        var promise = new Promise(function (resolve, reject) {
+            products.getById(id, function (err, dat) {
+                if (err) reject(err);
+                if (!dat) {
+                    reject(new Error('Invalid category id!'));
+                } else {
+                    products.remove(dat, function (err, done) {
+                        if (err) reject(err);
+
+                        resolve(done);
+                    });
+                };
+            });
+        });
+
+        return promise;
     }
 };

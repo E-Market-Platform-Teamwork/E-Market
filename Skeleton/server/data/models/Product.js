@@ -12,24 +12,45 @@ module.exports.init = function () {
         categories: [{type: Schema.Types.ObjectId, ref: 'Category'}]
     });
 
-    productSchema.post('save', function(doc) {
+    productSchema.post('save', function (doc) {
         console.log(doc);
 
         var Category = require('mongoose').model('Category');
-            Category.findOne({'_id' : doc.categories[0]}).exec(function(err,category){
-                console.log(category);
-               category.products.push(doc.id);
-                Category.update({_id: category._id}, category, function (err, success) {
-                    if (err) {
-                        console.log(err);
-                        return;
-                    }
-                    console.log("Category updated with " + doc.name + "!");
-                });
-
+        Category.findOne({'_id': doc.categories[0]}).exec(function (err, category) {
+            console.log(category);
+            category.products.push(doc.id);
+            Category.update({_id: category._id}, category, function (err, success) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log("Category updated with " + doc.name + "!");
             });
 
+        });
+
         console.log('%s has been saved', doc._id);
+    });
+
+    productSchema.post('remove', function (doc) {
+
+        var Category = require('mongoose').model('Category');
+
+        Category.findOne({'_id': doc.categories[0]}).exec(function (err, category) {
+            console.log(category);
+            var index = category.products.indexOf(doc.id);
+            if (index !== -1) {
+                category.products.splice(index, 1);
+            }
+            Category.update({_id: category._id}, category, function (err, success) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                console.log("Product removed from category with name:"+doc.name+"!");
+            });
+
+        });
     });
 
     var Product = mongoose.model('Product', productSchema);
@@ -65,7 +86,7 @@ module.exports.init = function () {
                             return;
                         }
 
-                        var ind = product.name.split(' ')[1]|0;
+                        var ind = product.name.split(' ')[1] | 0;
 
                         console.log(product.name + " seeded success!");
                         console.log(categories[ind]);

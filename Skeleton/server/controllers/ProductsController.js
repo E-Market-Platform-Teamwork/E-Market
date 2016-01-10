@@ -33,5 +33,17 @@ module.exports = {
                 res.status(404)
                     .send(err);
             });
+    },
+    remove: function (req, res) {
+        services.products.removeById(req.params.id)
+            .then(function (dat) {
+                console.log('product removed');
+                res.redirect('/products');
+                res.send(dat);
+            }, function (err) {
+                console.log(err.message);
+                res.status(404)
+                    .send(err.message);
+            });
     }
 };

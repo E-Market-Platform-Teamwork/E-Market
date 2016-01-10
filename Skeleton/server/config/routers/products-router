@@ -2,6 +2,7 @@ var router = require('express').Router(),
     controllers = require('../../controllers');
 
 router
+    .get('/remove/:id', controllers.products.remove)
     .get('/', controllers.products.get)
     .post('/add', controllers.products.add)
     .get('/add', controllers.products.getAddForm);
