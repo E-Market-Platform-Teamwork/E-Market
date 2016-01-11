@@ -1,6 +1,6 @@
 extends ../shared/layout.jade
 block main-content
-    form.form-horizontal(method="post" action="/products/add")
+    form.form-horizontal(method="post" action="/products/add" enctype="multipart/form-data")
         fieldset
         legend Create Product
         .form-group
@@ -18,10 +18,6 @@ block main-content
             .col-lg-10
             input#price.form-control(type='number', placeholder='Price', name="price")
         .form-group
-            label.col-lg-2.control-label(for='imageUrl') Image URL
-            .col-lg-10
-            input#imageUrl.form-control(type='text', placeholder='Image URL', name="imageUrl")
-        .form-group
             label.col-lg-2.control-label(for='quantity') Quantity
             .col-lg-10
             input#quantity.form-control(type='number', placeholder='Quantity', name="quantity")
@@ -31,6 +27,10 @@ block main-content
            select(name="categories")
                each category in categories
                    option(value='#{category.id}') #{category.name}
+        .form-group
+            label.col-lg-2.control-label(for='productImage') Image
+            .col-lg-10
+            input#productImage.form-control(type='file', name='productImage')
         .form-group
             .col-lg-10.col-lg-offset-2
             a(href="/").btn.btn-default Cancel

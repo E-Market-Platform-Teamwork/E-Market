@@ -14,7 +14,8 @@ module.exports = {
             });
     },
     add: function (req, res) {
-        console.log(req.body);
+       console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(req.body.imageUrl);
         services.products.create(req.body)
             .then(function (dat) {
                 console.log(dat);

@@ -8,4 +8,5 @@ block main-content
 
             p
                | #{product.description}
+            img(src="#{product.imageUrl}" alt="Poduct image!")
             a(href='/products/remove/#{product.id}') Remove Products
