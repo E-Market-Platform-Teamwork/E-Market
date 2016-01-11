@@ -31,8 +31,8 @@ module.exports = {
         file.pipe(fstream);
     },
     
-    getImageUrl: function() {
-        if(fs.existsSync('/images/companyImage.bmp')) return '/images/companyImage.bmp';
+    getCompanyImageUrl: function() {
+        if(fs.existsSync('public/images/companyImage.bmp')) return '/images/companyImage.bmp';
         if(fs.existsSync('/images/companyImage.png')) return '/images/companyImage.png';
         if(fs.existsSync('/images/companyImage.jpg')) return '/images/companyImage.jpg';
         

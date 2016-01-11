@@ -1,4 +1,5 @@
-var Common = require('mongoose').model('Common');
+var Common = require('mongoose').model('Common'),
+    fs = require('fs');
 
 module.exports = {
     create: function (object, callback) {
