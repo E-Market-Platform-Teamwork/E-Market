@@ -34,7 +34,7 @@ module.exports = {
             products.getById(id, function (err, dat) {
                 if (err) reject(err);
                 if (!dat) {
-                    reject(new Error('Invalid category id!'));
+                    reject(new Error('Invalid product id!'));
                 } else {
                     products.remove(dat, function (err, done) {
                         if (err) reject(err);
@@ -60,6 +60,23 @@ module.exports = {
 
 
             });
+        });
+
+        return promise;
+    },
+    update: function (id, product) {
+        var promise = new Promise(function (resolve, reject) {
+
+            products.update(id, product, function (err, product) {
+                console.log("_________________product updated______________________________");
+                console.log(product);
+                if (err) {
+                    reject(new Error('Invalid product id!'));
+                } else {
+                    resolve(product);
+                }
+            });
+
         });
 
         return promise;

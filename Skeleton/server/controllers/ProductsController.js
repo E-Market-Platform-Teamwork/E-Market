@@ -25,7 +25,7 @@ module.exports = {
             });
     },
     add: function (req, res) {
-       console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         console.log(req.body.imageUrl);
         services.products.create(req.body)
             .then(function (dat) {
@@ -62,11 +62,33 @@ module.exports = {
         console.log(req.params);
         services.products.getById(req.params.id)
             .then(function (product) {
-                res.render('products/details',{product:product});
+                res.render('products/details', {product: product});
             }, function (err) {
                 console.log(err.message);
                 res.status(404)
                     .send(err.message);
             })
+    },
+    update: function (req, res) {
+        console.log("_____________REQ BODY___________________");
+        console.log(req.body);
+        services.products.update(req.params.id, req.body)
+            .then(function (product) {
+                res.redirect('/products/' + req.params.id);
+            }, function (err) {
+                res.status(404)
+                    .send(err.message);
+            });
+    },
+    getUpdateForm: function (req, res) {
+        services.categories.getAll().then(function (categories) {
+            services.products.getById(req.params.id)
+                .then(function (product) {
+                    res.render('products/edit', {product: product, categories: categories});
+                }, function (err) {
+                    res.status(404)
+                        .send(err.message);
+                })
+        });
     }
 };

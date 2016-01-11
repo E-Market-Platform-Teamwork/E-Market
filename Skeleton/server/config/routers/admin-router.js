@@ -36,6 +36,8 @@ router
     .get('/products/remove/:id', controllers.products.remove)
     .post('/products/add', upload.single('productImage'), controllers.products.add)
     .get('/products/add', controllers.products.getAddForm)
+    .get('/products/edit/:id', controllers.products.getUpdateForm)
+    .post('/products/edit/:id', upload.single('productImage'), controllers.products.update)
     .get('*', function (req, res) {
         res.render('admin-index', {currentUser: req.user});
     });
