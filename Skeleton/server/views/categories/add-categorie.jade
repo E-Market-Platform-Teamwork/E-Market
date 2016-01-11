@@ -1,20 +1,18 @@
-extends ../shared/layout.jade
+extends ../shared/admin-layout
 
 block main-content
-    form.form-horizontal(method="post" action="/categories/add")
+    form.form-horizontal(method="post" action="/admin/categories/add")
         fieldset
-        legend Create Categorie
+        legend Create Category
         .form-group
-            label.col-lg-2.control-label(for='name') Name
-            .col-lg-10
-            input#name.form-control(type='text', placeholder='Name', name="name")
+            label.col-lg-1.control-label(for='name') Name
+            .col-md-8
+                input#name.form-control(type='text', placeholder='Name', name="name")
         .form-group
-            label.col-lg-2.control-label(for='textArea') Description
-            .col-lg-10
-            textarea#textArea.form-control(rows='3', name="description")
-            span.help-block
-                | Write short description of the category.
+            label.col-lg-1.control-label(for='textArea') Description
+            .col-lg-8
+                textarea#textArea.form-control(rows='3', name="description", placeholder='Write short description of the category')
         .form-group
-            .col-lg-10.col-lg-offset-2
-            a(href="/").btn.btn-default Cancel
-            input.btn.btn-primary(type='submit' value="Create")
+            .col-lg-10.col-lg-offset-3
+            a(href="/admin/categories/add").btn.btn-default Cancel
+            input.btn.btn-primary.buttonMargin(type='submit' value="Create")

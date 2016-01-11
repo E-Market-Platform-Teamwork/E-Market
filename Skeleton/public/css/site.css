@@ -15,3 +15,15 @@ label.label-floatlabel {
 .error{
     color: darkred;
 }
+.rightContainer {
+    float: left;
+    width: 80%;
+}
+.leftContainer {
+    float: left;
+    width: 150px;
+    margin-right: 20px;
+}
+.buttonMargin{
+    margin-left: 20px;
+}
