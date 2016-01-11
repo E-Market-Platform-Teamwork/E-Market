@@ -11,19 +11,14 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
         var fileName = Date.now()+'-'+ file.originalname;
         var fullPath = UPLOAD_PATH + fileName;
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        console.log(fullPath.substring(1));
-        req.body.imageUrl = fullPath.substring(1);
+        console.log("huhuhuhuhuhuhuhuhuhuhuhuhuhu");
+        console.log(fullPath.substring(8));
+        req.body.imageUrl = fullPath.substring(8);
         cb(null,fileName );
     }
 });
-
-var upload = multer({ storage: storage });
 router
-    .get('/remove/:id', controllers.products.remove)
     .get('/', controllers.products.get)
-    .post('/add',upload.single('productImage'), controllers.products.add)
-    .get('/add', controllers.products.getAddForm);
 
 module.exports = function (app) {
     app.use('/products', router);
