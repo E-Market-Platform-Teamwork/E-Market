@@ -12,6 +12,17 @@ module.exports = {
             });
     },
 
+    getAuthenticated: function (req, res) {
+        services.categories.getAll()
+            .then(function (dat) {
+                res.render('categories/adminCategories', { categories: dat });
+            }, function (err) {
+                res
+                    .status(404)
+                    .send(err);
+            });
+    },
+
     getAddCategory: function (req, res) {
         res.render('categories/add-categorie');
     },

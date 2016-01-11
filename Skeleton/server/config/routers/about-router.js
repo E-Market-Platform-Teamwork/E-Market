@@ -1,10 +1,8 @@
 var router = require('express').Router(),
     controllers = require('../../controllers');
 
-//router
-//    .get('/', controllers.about.get)
-//    .post('', controllers.about.add)
-
+    .post('', controllers.about.add)
+    .get('/', controllers.about.getAbout)
 module.exports = function (app) {
     app.use('/about', router);
 }
