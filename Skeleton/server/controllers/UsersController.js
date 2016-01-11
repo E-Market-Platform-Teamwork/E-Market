@@ -10,10 +10,10 @@ module.exports = {
     },
     postRegister: function (req, res, next) {
         var newUserData = req.body;
-
+        console.log(newUserData);
         if (newUserData.password != newUserData.confirmPassword) {
             req.session.error = 'Passwords do not match!';
-            res.redirect('/register');
+            res.redirect('/account/register');
         }
         else {
             newUserData.salt = encryption.generateSalt();

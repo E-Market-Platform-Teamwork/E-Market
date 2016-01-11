@@ -3,12 +3,8 @@ var router = require('express').Router(),
     auth = require('../auth');
 
 router
-    .get('/', controllers.categories.get)
-    .get('/add', controllers.categories.getAddCategory)
-    .post('/add', controllers.categories.create)
-    .delete('/remove', controllers.categories.remove)
-    .get('/manage', controllers.categories.getManage);
+    .get('/', controllers.categories.get);
 
 module.exports = function (app) {
     app.use('/categories', router);
-}
+};
