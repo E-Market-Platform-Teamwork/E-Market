@@ -2,17 +2,17 @@ extends ../shared/layout
 
 block main-content
     .container
-        .col-md-8.col-sm-offset-2.col-md-offset-2
+        .col-xs-12.col-sm-8.col-md-8.col-sm-offset-2.col-md-offset-2
             .panel.panel-default
                 .panel-heading
                     h3.panel-title Please sign up
                 .panel-body
-                    form(role='form', method='POST', name='registerForm')
+                    form(role='form', method='POST', name='registerForm', action='/account/register')
                         .form-group
-                            input#user_name.form-control.input-sm.floatlabel(type='text', name='user_name', ng-model='vm.user.userName', required='', ng-minlength='6', placeholder='User Name')
-                            span.label.error(ng-show='registerForm.user_name.$error.required')
+                            input#user_name.form-control.input-sm.floatlabel(type='text', name='username', ng-model='vm.user.userName', required='', ng-minlength='6', placeholder='User Name')
+                            span.label.error(ng-show='registerForm.username.$error.required')
                                 | *This is a required field
-                            span.label.error(ng-show='registerForm.user_name.$error.minlength')
+                            span.label.error(ng-show='registerForm.username.$error.minlength')
                                 | *Minimum length required is 6
                         .row
                             .col-xs-6.col-sm-6.col-md-6
@@ -24,8 +24,8 @@ block main-content
                                         | *Minimum length required is 6
                             .col-xs-6.col-sm-6.col-md-6
                                 .form-group
-                                    input#password_confirmation.form-control.input-sm(type='password', name='password_confirmation', ng-model='vm.user.confirmPassword', required='', ng-minlength='6', placeholder='Confirm Password')
-                                    span.label.error(ng-show='registerForm.password_confirmation.$error.required')
+                                    input#password_confirmation.form-control.input-sm(type='password', name='confirmPassword', ng-model='vm.user.confirmPassword', required='', ng-minlength='6', placeholder='Confirm Password')
+                                    span.label.error(ng-show='registerForm.confirmPassword.$error.required', ng-hide='registerForm.password.$dirty')
                                         | *This is a required field
                                     span.label.error(ng-show='vm.user.password != vm.user.confirmPassword')
                                         | *Does not match the password
