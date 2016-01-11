@@ -1,4 +1,4 @@
-extends ../shared/layout
+extends ../shared/admin-layout
 block main-content
    .row.text-center
       each product in products
@@ -9,4 +9,4 @@ block main-content
                   h3.cutText #{product.name}
                   p.ellipsis #{product.description}
                   p
-                     a.btn.btn-default(href='#') View
+                     a.btn.btn-primary(href='/admin/products/remove/#{product.id}') Remove

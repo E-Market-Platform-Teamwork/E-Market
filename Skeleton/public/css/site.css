@@ -27,3 +27,9 @@ label.label-floatlabel {
 .buttonMargin{
     margin-left: 20px;
 }
+.hero-feature {
+    margin-bottom: 30px;
+}
+.cutText {
+    text-overflow: ellipsis;
+}

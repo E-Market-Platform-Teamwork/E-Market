@@ -13,14 +13,25 @@ module.exports = {
                     .send(err);
             });
     },
+    getAuthenticated: function (req, res) {
+        services.products.getAll()
+            .then(function (dat) {
+                console.log(dat);
+                res.render('products/productsAdmin', {products: dat});
+            }, function (err) {
+                res
+                    .status(404)
+                    .send(err);
+            });
+    },
     add: function (req, res) {
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+       console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         console.log(req.body.imageUrl);
         services.products.create(req.body)
             .then(function (dat) {
                 console.log(dat);
-                res.status(201)
-                    .send("Product added!");
+                res.status(201);
+                res.redirect("/admin/products");
             }, function (err) {
                 res.status(404)
                     .send(err);
@@ -39,7 +50,7 @@ module.exports = {
         services.products.removeById(req.params.id)
             .then(function (dat) {
                 console.log('product removed');
-                res.redirect('/products');
+                res.redirect('/admin/products');
             }, function (err) {
                 console.log(err.message);
                 res.status(404)
