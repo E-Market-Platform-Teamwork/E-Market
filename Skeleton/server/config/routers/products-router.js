@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 });
 router
     .get('/', controllers.products.get)
-    .get('/add', controllers.products.getAddForm),
+    .get('/add', controllers.products.getAddForm)
     .get('/:id', controllers.products.getById);
 
 module.exports = function (app) {

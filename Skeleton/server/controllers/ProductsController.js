@@ -62,8 +62,6 @@ module.exports = {
         console.log(req.params);
         services.products.getById(req.params.id)
             .then(function (product) {
-                console.log("Product details >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                console.log(product);
                 res.render('products/details',{product:product});
             }, function (err) {
                 console.log(err.message);
