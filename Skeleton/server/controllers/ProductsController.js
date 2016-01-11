@@ -14,7 +14,7 @@ module.exports = {
             });
     },
     add: function (req, res) {
-       console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         console.log(req.body.imageUrl);
         services.products.create(req.body)
             .then(function (dat) {
@@ -40,11 +40,24 @@ module.exports = {
             .then(function (dat) {
                 console.log('product removed');
                 res.redirect('/products');
-                res.send(dat);
             }, function (err) {
                 console.log(err.message);
                 res.status(404)
                     .send(err.message);
             });
+    },
+    getById: function (req, res) {
+        console.log("request parameters >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        console.log(req.params);
+        services.products.getById(req.params.id)
+            .then(function (product) {
+                console.log("Product details >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                console.log(product);
+                res.render('products/details',{product:product});
+            }, function (err) {
+                console.log(err.message);
+                res.status(404)
+                    .send(err.message);
+            })
     }
 };

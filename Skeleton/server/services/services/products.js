@@ -6,7 +6,8 @@ module.exports = {
             products.all(function (err, done) {
                 if (err) {
                     reject(err);
-                };
+                }
+                ;
 
                 resolve(done);
             });
@@ -19,7 +20,8 @@ module.exports = {
             products.create(product, function (err, done) {
                 if (err) {
                     reject(err);
-                };
+                }
+                ;
 
                 resolve(done);
             });
@@ -39,7 +41,24 @@ module.exports = {
 
                         resolve(done);
                     });
-                };
+                }
+                ;
+            });
+        });
+
+        return promise;
+    },
+    getById: function (id) {
+        var promise = new Promise(function (resolve, reject) {
+            products.getById(id, function (err, dat) {
+                if (err) reject(err);
+                if (!dat) {
+                    reject(new Error('Invalid product id!'));
+                } else {
+                    resolve(dat);
+                }
+
+
             });
         });
 
