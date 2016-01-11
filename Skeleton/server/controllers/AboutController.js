@@ -4,7 +4,11 @@ module.exports = {
     getAbout: function (req, res) {
         services.about.getByName('about')
             .then(function (dat) {
-                res.render('about/about', { info: dat.data });
+                var imageUrl = services.about.getCompanyImageUrl();
+                res.render('about/about', {
+                    info: dat.data,
+                    imageUrl: imageUrl
+                });
             }, function (err) {
                 res.status(404)
                     .end();
@@ -14,7 +18,11 @@ module.exports = {
     getAboutAuthenticated: function (req, res) {
         services.about.getByName('about')
             .then(function (dat) {
-                res.render('about/adminAbout', { info: dat.data });
+                var imageUrl = services.about.getCompanyImageUrl();
+                res.render('about/adminAbout', {
+                    info: dat.data,
+                    imageUrl: imageUrl
+                });
             }, function (err) {
                 res.status(404)
                     .end();
@@ -24,7 +32,7 @@ module.exports = {
     getEdit: function (req, res) {
         services.about.getByName('about')
             .then(function (dat) {
-                res.render('about/about-manage', { info: dat.data, imageUrl: services.about.getImageUrl() });
+                res.render('about/about-manage', { info: dat.data });
             }, function (err) {
                 res.status(404)
                     .end();
