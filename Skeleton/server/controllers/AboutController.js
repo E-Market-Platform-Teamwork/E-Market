@@ -11,6 +11,16 @@ module.exports = {
             });
     },
 
+    getAboutAuthenticated: function (req, res) {
+        services.about.getByName('about')
+            .then(function (dat) {
+                res.render('about/adminAbout', { info: dat.data });
+            }, function (err) {
+                res.status(404)
+                    .end();
+            });
+    },
+
     getEdit: function (req, res) {
         services.about.getByName('about')
             .then(function (dat) {
@@ -24,7 +34,7 @@ module.exports = {
     edit: function (req, res) {
         services.about.update(req.body)
             .then(function (dat) {
-                res.redirect('/about')
+                res.redirect('/admin/about')
             }, function (err) {
                 res.status(404)
                     .send(err);
