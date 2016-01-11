@@ -2,7 +2,8 @@ var router = require('express').Router(),
     usersController = require('../../controllers').users,
     auth = require('../auth');
 
-router.get('/register', usersController.getRegister)
+router
+    .get('/register', usersController.getRegister)
     .post('/register', usersController.postRegister)
     .get('/login', usersController.getLogin)
     .post('/login', auth.login)

@@ -5,7 +5,10 @@ var router = require('express').Router(),
 router
     .get('/unauthorized', function(req,res){
         res.render('unauthorized')
-    });
+    })
+    .get('/', function (req, res){
+        res.render('home')
+    })
 
 module.exports = function (app) {
     app.use('/', router);
