@@ -4,6 +4,8 @@ module.exports = {
     users: UsersController,
     categories: require('./CategoriesController'),
     products: require('./ProductsController'),
+
     about: require('./AboutController'),
-    home: require('./HomeController')
+    home: require('./HomeController'),
+    chat:require('./ChatController')
 };
