@@ -90,5 +90,15 @@ module.exports = {
                         .send(err.message);
                 })
         });
+    },
+    getProductsByCategoryId: function(req,res){
+        var categoryId = req.params.id;
+        services.categories.getProductsByCategoryId(categoryId)
+            .then(function(products){
+                res.render('products/products', {products:products});
+            },function(err){
+                res.status(404)
+                    .send(err.message);
+            })
     }
 };

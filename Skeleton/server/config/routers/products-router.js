@@ -3,6 +3,7 @@ var router = require('express').Router(),
 
 router
     .get('/', controllers.products.get)
+    .get('/bycategory/:id', controllers.products.getProductsByCategoryId)
     .get('/:id', controllers.products.getById);
 
 module.exports = function (app) {

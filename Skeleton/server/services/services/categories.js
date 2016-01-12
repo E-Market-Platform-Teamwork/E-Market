@@ -46,5 +46,19 @@ module.exports = {
         });
 
         return promise;
+    },
+    getProductsByCategoryId: function(id){
+        var promise = new Promise(function (resolve, reject) {
+            categories.getProductsByCategoryId(id, function (err, dat) {
+                if (err) reject(err);
+                if (!dat) {
+                    reject(new Error('Invalid category id!'));
+                } else {
+                        resolve(dat);
+                }
+            });
+        });
+
+        return promise;
     }
-}
+};

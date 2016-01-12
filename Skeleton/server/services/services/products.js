@@ -80,5 +80,19 @@ module.exports = {
         });
 
         return promise;
+    },
+    getLatestTen: function () {
+        var promise = new Promise(function (resolve, reject) {
+            products.getLatestTen(function (err, dat) {
+                if (err) reject(err);
+                if (!dat) {
+                    reject(new Error('Invalid category id!'));
+                } else {
+                    resolve(dat);
+                }
+            });
+        });
+
+        return promise;
     }
 };

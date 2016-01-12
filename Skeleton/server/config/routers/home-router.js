@@ -1,14 +1,12 @@
 var router = require('express').Router(),
-//usersController = require('../../controllers').categories,
+    controllers = require('../../controllers'),
     auth = require('../auth');
 
 router
     .get('/unauthorized', function(req,res){
         res.render('unauthorized')
     })
-    .get('/', function (req, res){
-        res.render('home')
-    })
+    .get('/',controllers.home.getHomePage);
 
 module.exports = function (app) {
     app.use('/', router);

@@ -35,4 +35,5 @@ module.exports = {
         console.log(product);
         Product.update({_id: id}, product, callback);
     }
+
 };

@@ -20,17 +20,28 @@ module.exports = {
             .exec(function (err, done) {
                 if (err) {
                     return callback(err);
-                };
+                }
+                ;
 
                 callback(null, done);
             });
     },
 
     getById: function (id, callback) {
-        Category.findOne({ _id: id }, function (err, done) {
+        Category.findOne({_id: id}, function (err, done) {
             if (err) return callback(err);
 
             return callback(null, done);
+        });
+    },
+
+    getProductsByCategoryId: function (id, callback) {
+        Category.findOne({_id: id}).populate('products').exec(function (err, done) {
+            if (err) {
+                callback(err);
+            } else {
+             callback(null, done.products);
+            }
         });
     }
 };
