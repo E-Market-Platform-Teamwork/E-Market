@@ -1,16 +1,18 @@
-module.exports = function (app) {
-    var http = require('http').Server(app);
-    var io = require('socket.io')(http);
+var socketio = require('socket.io');
 
-
+module.exports.listen = function (app) {
+    io = socketio.listen(app);
     io.on('connection', function (socket) {
-        socket.emit('message', { message: 'Connected' })
         socket.on('message', function (msg) {
-            console.log(msg.message);
+            if (msg.message.length > 0) {
+                io.emit('message', {
+                    message: msg.message,
+                    username: msg.username,
+                    time: Date.now()
+                });
+            }
         });
     });
 
-    http.listen(3001, function () {
-        console.log('listening on *:3000');
-    });
+    return io;
 }

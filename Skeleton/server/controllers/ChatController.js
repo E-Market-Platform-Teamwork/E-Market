@@ -2,6 +2,12 @@
 
 module.exports = {
     get: function (req, res) {
-        res.render('chat/chat');
+        var username;
+        if(req.user) {
+            username = req.user.username;
+        } else {
+            username = 'Guest';
+        }
+        res.render('chat/chat', { username: username });
     }
 };

@@ -1,16 +1,25 @@
 (function () {
     'use strict'
+    var socket = io();
 
-    function ChatController($scope, $http, $rootScope, globalConstants) {
-        var socket = io('http://localhost:3001');
+    function ChatController($scope, $filter) {
         socket.on('message', function (data) {
-            console.log(data);
+            $('.messages-container').append('<div>' +
+                '<span>' + data.username + '</span>' +
+                '<span> (' + $filter('date')(data.time, 'yyyy-MM-dd HH:mm:ss') + ')</span>' +
+                '<p>>' + data.message + '</p>' +
+                '</div><hr>');
         });
-        $scope.send = function () {
-            socket.emit('message', { message: $scope.msg });
+        $scope.send = function (username) {
+            socket.emit('message', {
+                message: $scope.msg || '',
+                username: $('#username').html()
+            });
+
+            $scope.msg = null;
         }
     };
 
     angular.module('app')
-        .controller('ChatController', ['$scope', '$http', '$rootScope', 'globalConstants', ChatController]);
+        .controller('ChatController', ['$scope', '$filter', ChatController]);
 } ());
