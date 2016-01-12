@@ -18,6 +18,7 @@
     "multer": "^1.1.0",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
-    "seeder": "^0.2.1"
+    "seeder": "^0.2.1",
+    "socket.io": "^1.4.4"
   }
 }
