@@ -34,6 +34,11 @@ module.exports = {
         console.log("_______Product before update in data layer_______");
         console.log(product);
         Product.update({_id: id}, product, callback);
+    },
+    getLatestTen: function(callback){
+        Product.find({},{},{
+            sort: {'dateUpdated': -1},
+            limit: 10
+        },callback);
     }
-
 };

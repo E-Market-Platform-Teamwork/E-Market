@@ -10,3 +10,28 @@ block main-content
                   p.ellipsis #{product.description}
                   p
                      a.btn.btn-default(href='/products/#{product.id}') View
+   if(!!totalPages)
+      div(id="page-selection") Pagination goes here
+      script.
+         var currentPage = window.location.search.split('=')[1];
+         var number
+         $('#page-selection').bootpag({
+            total: #{totalPages},
+            page: currentPage ,
+            maxVisible: 5,
+            leaps: true,
+            firstLastUse: true,
+            first: '|<<',
+            last: '>>|',
+            wrapClass: 'pagination',
+            activeClass: 'active',
+            disabledClass: 'disabled',
+            nextClass: 'next',
+            prevClass: 'prev',
+            lastClass: 'last',
+            firstClass: 'first'
+         }).on("page", function (event, num) {
+            console.log(window.location);
+            var url = window.location.pathname+ "?page="+num;
+            $(location).attr("href", url);
+         });

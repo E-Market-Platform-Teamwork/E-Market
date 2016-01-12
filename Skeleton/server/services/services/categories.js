@@ -47,9 +47,9 @@ module.exports = {
 
         return promise;
     },
-    getProductsByCategoryId: function(id){
+    getProductsByCategoryId: function(id, page){
         var promise = new Promise(function (resolve, reject) {
-            categories.getProductsByCategoryId(id, function (err, dat) {
+            categories.getProductsByCategoryId(id, page, function (err, dat) {
                 if (err) reject(err);
                 if (!dat) {
                     reject(new Error('Invalid category id!'));

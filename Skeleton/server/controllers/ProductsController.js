@@ -91,12 +91,13 @@ module.exports = {
                 })
         });
     },
-    getProductsByCategoryId: function(req,res){
+    getProductsByCategoryId: function (req, res) {
         var categoryId = req.params.id;
-        services.categories.getProductsByCategoryId(categoryId)
-            .then(function(products){
-                res.render('products/products', {products:products});
-            },function(err){
+        var page = req.query.page;
+        services.categories.getProductsByCategoryId(categoryId, page)
+            .then(function (category) {
+                res.render('products/products', {products: category.products, totalPages: category.totalPages});
+            }, function (err) {
                 res.status(404)
                     .send(err.message);
             })

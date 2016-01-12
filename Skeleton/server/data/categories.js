@@ -35,13 +35,29 @@ module.exports = {
         });
     },
 
-    getProductsByCategoryId: function (id, callback) {
-        Category.findOne({_id: id}).populate('products').exec(function (err, done) {
-            if (err) {
-                callback(err);
-            } else {
-             callback(null, done.products);
-            }
-        });
+    getProductsByCategoryId: function (id, page, callback) {
+        page = page || 1;
+        const PROJECTS_PER_PAGE = 6;
+        var skip = PROJECTS_PER_PAGE * (page - 1);
+        Category.findOne({_id: id})
+            .populate(
+            {
+                path: 'products',
+                options: {limit: PROJECTS_PER_PAGE, skip: skip, sort: {'dateUpdated': -1}}
+            })
+            .exec(function (err, done) {
+                if (err) {
+                    callback(err);
+                } else {
+                    Category.findOne({_id: id}).exec(function (err, result) {
+
+                        console.log(result.products.length);
+                        done.totalPages = ((result.products.length / PROJECTS_PER_PAGE)|0) + 1;
+                        console.log(done.totalPages);
+                        callback(null, done);
+                    })
+
+                }
+            });
     }
 };
