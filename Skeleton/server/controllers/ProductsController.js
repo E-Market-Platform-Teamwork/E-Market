@@ -81,15 +81,16 @@ module.exports = {
             });
     },
     getUpdateForm: function (req, res) {
+        var allCategories;
         services.categories.getAll().then(function (categories) {
-            services.products.getById(req.params.id)
+            allCategories = categories;
+           return services.products.getById(req.params.id)})
                 .then(function (product) {
-                    res.render('products/edit', {product: product, categories: categories});
+                    res.render('products/edit', {product: product, categories: allCategories});
                 }, function (err) {
                     res.status(404)
                         .send(err.message);
-                })
-        });
+                });
     },
     getProductsByCategoryId: function (req, res) {
         var categoryId = req.params.id;

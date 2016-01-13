@@ -1,0 +1,24 @@
+mixin pagination(totalPages)
+   div(id="page-selection") Pagination goes here
+       script.
+           var currentPage = window.location.search.split('=')[1];
+           var number
+           $('#page-selection').bootpag({
+               total: #{totalPages},
+               page: currentPage,
+               maxVisible: 10,
+               leaps: true,
+               firstLastUse: true,
+               first: '|<<',
+               last: '>>|',
+               wrapClass: 'pagination',
+               activeClass: 'active',
+               disabledClass: 'disabled',
+               nextClass: 'next',
+               prevClass: 'prev',
+               lastClass: 'last',
+               firstClass: 'first'
+           }).on("page", function (event, num) {
+               var url = window.location.pathname + "?page=" + num;
+               $(location).attr("href", url);
+           });
