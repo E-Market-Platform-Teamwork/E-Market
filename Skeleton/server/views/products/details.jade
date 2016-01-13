@@ -1,12 +1,12 @@
 extends ../shared/layout
 block main-content
-    ul.nav.nav-pills
-        li
-            .jumbotron
-                h1 #{product.name}
-                p
-                    | #{product.description}
-                img(src="#{product.imageUrl}" alt="Poduct image!")
-                h2 #{product.price}
-                h2 #{product.quality}
-                h2 Published date #{product.dateUpdated}
+    .row.text-center
+        .col-md-12.col-sm-10.hero-feature
+            h1.cutText #{product.name}
+            .thumbnail
+                img(src='#{product.imageUrl}', alt='')
+                .caption
+                    p.ellipsis #{product.description}
+                    h2 Price: #{product.price}.00
+                    h2 Quantity: #{product.quality | 0}
+                    h2 Published date: #{moment(Date.now()).format('MM/DD/YYYY')}
