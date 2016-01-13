@@ -3,7 +3,8 @@ var categories = require('../data/products'),
 
 module.exports = {
     get: function (req, res) {
-        services.products.getAll()
+        var filterString = req.query.filterby || '';
+        services.products.getAll(filterString)
             .then(function (dat) {
                 console.log(dat);
                 res.render('products/products', { products: dat });

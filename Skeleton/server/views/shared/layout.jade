@@ -17,17 +17,28 @@ html
                             span.sr-only E-commerse navigation
                         a.navbar-brand(href='/') Company Name
                     #bs-example-navbar-collapse-1.collapse.navbar-collapse
-                        ul.nav.navbar-nav
-                            li.active
-                                a(href='/')
-                                    | Home
-                                    span.sr-only (current)
-                            li
-                                a(href='/categories') Categories
-                            li
-                                a(href='/products') Products
-                            li
-                                a(href='/about') About Us
+                        if(currentUser && currentUser.roles === 'admin')
+                            ul.nav.navbar-nav
+                                li.active
+                                    a(href="/admin") Home
+                                li
+                                    a(href="/admin/products") Products
+                                li
+                                    a(href="/admin/categories") Categories
+                                li
+                                    a(href="/admin/about") About Us
+                        else
+                            ul.nav.navbar-nav
+                                li.active
+                                    a(href='/')
+                                        | Home
+                                        span.sr-only (current)
+                                li
+                                    a(href='/categories') Categories
+                                li
+                                    a(href='/products') Products
+                                li
+                                    a(href='/about') About Us
                         ul.nav.navbar-nav.navbar-right
                             if (currentUser)
                                 if(currentUser.roles === 'admin')
