@@ -12,6 +12,7 @@ module.exports = function(app, config) {
     app.use(cookieParser());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
+    app.locals.moment = require('moment');
     app.use(busboy({immediate: false}));
     app.use(session({secret: 'magic unicorns', resave: true, saveUninitialized: true}));
     app.use(passport.initialize());
