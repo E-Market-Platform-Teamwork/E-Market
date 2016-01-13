@@ -3,10 +3,11 @@ var categories = require('../data/products'),
 
 module.exports = {
     get: function (req, res) {
-        services.products.getAll()
+        var filterString = req.query.filterby || '';
+        services.products.getAll(filterString)
             .then(function (dat) {
                 console.log(dat);
-                res.render('products/products', {products: dat});
+                res.render('products/products', { products: dat });
             }, function (err) {
                 res
                     .status(404)
@@ -14,10 +15,10 @@ module.exports = {
             });
     },
     getAuthenticated: function (req, res) {
-        services.products.getAll()
+        services.products.getAll('')
             .then(function (dat) {
                 console.log(dat);
-                res.render('products/productsAdmin', {products: dat});
+                res.render('products/productsAdmin', { products: dat });
             }, function (err) {
                 res
                     .status(404)
@@ -40,7 +41,7 @@ module.exports = {
     getAddForm: function (req, res) {
         services.categories.getAll()
             .then(function (dat) {
-                res.render('products/add-product', {categories: dat});
+                res.render('products/add-product', { categories: dat });
             }, function (err) {
                 res.status(404)
                     .send(err);
@@ -62,7 +63,7 @@ module.exports = {
         console.log(req.params);
         services.products.getById(req.params.id)
             .then(function (product) {
-                res.render('products/details', {product: product});
+                res.render('products/details', { product: product });
             }, function (err) {
                 console.log(err.message);
                 res.status(404)
@@ -74,7 +75,7 @@ module.exports = {
         console.log(req.body);
         services.products.update(req.params.id, req.body)
             .then(function (product) {
-                res.redirect('/products/' + req.params.id);
+                res.redirect('/admin/products');
             }, function (err) {
                 res.status(404)
                     .send(err.message);
@@ -97,7 +98,7 @@ module.exports = {
         var page = req.query.page;
         services.categories.getProductsByCategoryId(categoryId, page)
             .then(function (category) {
-                res.render('products/products', {products: category.products, totalPages: category.totalPages});
+                res.render('products/products', { products: category.products, totalPages: category.totalPages });
             }, function (err) {
                 res.status(404)
                     .send(err.message);

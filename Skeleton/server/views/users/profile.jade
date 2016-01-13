@@ -3,17 +3,17 @@ extends ../shared/layout.jade
 block main-content
     form.form-horizontal(method="post" action="/account/profile")
         fieldset
-        legend Create Categorie
+        legend Update your personal details
         .form-group
-            label.col-lg-2.control-label(for='username') Username
+            label.col-lg-2.control-label(for='username') Change Username
             .col-lg-10
             input#username.form-control(type='text', value="#{user.username}", name="username" disabled)
         .form-group
-            label.col-lg-2.control-label(for='password') Password
+            label.col-lg-2.control-label(for='password') Change Password
             .col-lg-10
             input#password.form-control(type='password', name="password")
         .form-group
-            label.col-lg-2.control-label(for='confirmPassword') Confirm password
+            label.col-lg-2.control-label(for='confirmPassword') Confirm New Password
             .col-lg-10
             input#confirmPassword.form-control(type='password', name="confirmPassword")
         .form-group

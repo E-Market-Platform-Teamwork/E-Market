@@ -1,9 +1,9 @@
 var products = require('../../data/products');
 
 module.exports = {
-    getAll: function () {
+    getAll: function (filterString) {
         var promise = new Promise(function (resolve, reject) {
-            products.all(function (err, done) {
+            products.all(filterString, function (err, done) {
                 if (err) {
                     reject(err);
                 }

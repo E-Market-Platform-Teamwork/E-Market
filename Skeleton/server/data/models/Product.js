@@ -3,23 +3,23 @@ var mongoose = require('mongoose'),
 
 module.exports.init = function () {
     var productSchema = new Schema({
-        name: {type: String, required: true},
-        description: {type: String, minlength: 5, maxlength: 500, required: true},
-        price: {type: Number, required: true},
-        imageUrl: {type: String, default: ''},
-        dateUpdated: {type: Date, default: Date.now},
+        name: { type: String, required: true },
+        description: { type: String, minlength: 5, maxlength: 500, required: true },
+        price: { type: Number, required: true },
+        imageUrl: { type: String, default: '' },
+        dateUpdated: { type: Date, default: Date.now() },
         quantity: Number,
-        categories: [{type: Schema.Types.ObjectId, ref: 'Category'}]
+        categories: [{ type: Schema.Types.ObjectId, ref: 'Category' }]
     });
 
     productSchema.post('save', function (doc) {
         console.log(doc);
 
         var Category = require('mongoose').model('Category');
-        Category.findOne({'_id': doc.categories[0]}).exec(function (err, category) {
+        Category.findOne({ '_id': doc.categories[0] }).exec(function (err, category) {
             console.log(category);
             category.products.push(doc.id);
-            Category.update({_id: category._id}, category, function (err, success) {
+            Category.update({ _id: category._id }, category, function (err, success) {
                 if (err) {
                     console.log(err);
                     return;
@@ -36,18 +36,18 @@ module.exports.init = function () {
 
         var Category = require('mongoose').model('Category');
 
-        Category.findOne({'_id': doc.categories[0]}).exec(function (err, category) {
+        Category.findOne({ '_id': doc.categories[0] }).exec(function (err, category) {
             console.log(category);
             var index = category.products.indexOf(doc.id);
             if (index !== -1) {
                 category.products.splice(index, 1);
             }
-            Category.update({_id: category._id}, category, function (err, success) {
+            Category.update({ _id: category._id }, category, function (err, success) {
                 if (err) {
                     console.log(err);
                     return;
                 }
-                console.log("Product removed from category with name:"+doc.name+"!");
+                console.log("Product removed from category with name:" + doc.name + "!");
             });
 
         });
@@ -91,7 +91,7 @@ module.exports.init = function () {
                         console.log(product.name + " seeded success!");
                         console.log(categories[ind]);
                         categories[ind].products.push(product);
-                        Category.update({_id: categories[ind]._id}, categories[ind], function (err, success) {
+                        Category.update({ _id: categories[ind]._id }, categories[ind], function (err, success) {
                             if (err) {
                                 console.log(err);
                                 return;

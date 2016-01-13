@@ -21,13 +21,15 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 router
     .get('/',function (req, res) {
-        res.render('admin-index', {currentUser: req.user});
+        res.render('admin-index');
     })
     .get('/categories', controllers.categories.getAuthenticated)
     .get('/categories/add', controllers.categories.getAddCategory)
     .post('/categories/add', controllers.categories.create)
     .delete('/categories/remove', controllers.categories.remove)
     .get('/categories/manage', controllers.categories.getManage)
+    .get('/categories/edit/:id', controllers.categories.getUpdateForm)
+    .post('/categories/edit/:id', controllers.categories.update)
     .get('/about', controllers.about.getAboutAuthenticated)
     .get('/about/edit', controllers.about.getEdit)
     .post('/about', controllers.about.edit)
@@ -39,7 +41,7 @@ router
     .get('/products/edit/:id', controllers.products.getUpdateForm)
     .post('/products/edit/:id', upload.single('productImage'), controllers.products.update)
     .get('*', function (req, res) {
-        res.render('admin-index', {currentUser: req.user});
+        res.render('admin-index');
     });
 
 module.exports = function (app) {

@@ -60,5 +60,34 @@ module.exports = {
         });
 
         return promise;
+    },
+    update: function (id, category) {
+        var promise = new Promise(function (resolve, reject) {
+            console.log('here');
+            categories.update(id, category, function (err, done) {
+                if (err) reject(err);
+
+                resolve(done);
+            });
+        });
+
+        return promise;
+    },
+
+    getById: function (id) {
+        var promise = new Promise(function (resolve, reject) {
+            categories.getById(id, function (err, dat) {
+                if (err) reject(err);
+                if (!dat) {
+                    reject(new Error('Invalid category id!'));
+                } else {
+                    resolve(dat);
+                }
+
+
+            });
+        });
+
+        return promise;
     }
 };

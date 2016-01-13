@@ -4,9 +4,9 @@ module.exports = {
     create: function (product, callback) {
         Product.create(product, callback);
     },
-    all: function (callback) {
+    all: function (filterString, callback) {
         Product
-            .find()
+            .find({'name': new RegExp('.*' + filterString + '.*', 'i')})
             .populate('categories')
             .exec(function (err, done) {
                 if (err) {
@@ -24,7 +24,7 @@ module.exports = {
         });
     },
     getById: function (id, callback) {
-        Product.findOne({_id: id}, function (err, done) {
+        Product.findOne({ _id: id }, function (err, done) {
             if (err) return callback(err);
 
             return callback(null, done);
@@ -33,12 +33,12 @@ module.exports = {
     update: function (id, product, callback) {
         console.log("_______Product before update in data layer_______");
         console.log(product);
-        Product.update({_id: id}, product, callback);
+        Product.update({ _id: id }, product, callback);
     },
-    getLatestTen: function(callback){
-        Product.find({},{},{
-            sort: {'dateUpdated': -1},
+    getLatestTen: function (callback) {
+        Product.find({}, {}, {
+            sort: { 'dateUpdated': -1 },
             limit: 10
-        },callback);
+        }, callback);
     }
 };
