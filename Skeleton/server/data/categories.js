@@ -35,6 +35,11 @@ module.exports = {
         });
     },
 
+    update: function (id, category, callback) {
+        console.log(category);
+        Category.update({_id: id}, category, callback);
+    },
+
     getProductsByCategoryId: function (id, page, callback) {
         page = page || 1;
         const PROJECTS_PER_PAGE = 6;

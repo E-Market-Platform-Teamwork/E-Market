@@ -1,0 +1,17 @@
+extends ../shared/admin-layout.jade
+block main-content
+   form.form-horizontal(method="post" action="/admin/categories/edit/#{category.id}")
+      fieldset
+      legend Edit Category
+         .form-group
+            label.col-lg-2.control-label(for='name') Name
+            .col-lg-10
+            input#name.form-control(type='text', placeholder='Name',value="#{category.name}", name="name")
+         .form-group
+            label.col-lg-2.control-label(for='textArea') Description
+            .col-lg-10
+            textarea#textArea.form-control(rows='3', placeholder='Write short description of the category',name="description")
+         .form-group
+            .col-lg-10.col-lg-offset-2
+            a(href="/admin/categories/edit/#{category.id}").btn.btn-default Cancel
+            input.btn.btn-primary(type='submit' value="Update")

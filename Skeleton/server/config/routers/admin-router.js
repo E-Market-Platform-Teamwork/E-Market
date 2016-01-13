@@ -28,6 +28,8 @@ router
     .post('/categories/add', controllers.categories.create)
     .delete('/categories/remove', controllers.categories.remove)
     .get('/categories/manage', controllers.categories.getManage)
+    .get('/categories/edit/:id', controllers.categories.getUpdateForm)
+    .post('/categories/edit/:id', controllers.categories.update)
     .get('/about', controllers.about.getAboutAuthenticated)
     .get('/about/edit', controllers.about.getEdit)
     .post('/about', controllers.about.edit)

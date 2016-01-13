@@ -58,5 +58,25 @@ module.exports = {
                     .status(404)
                     .send(err);
             });
+    },
+
+    update: function (req, res) {
+        services.categories.update(req.params.id, req.body)
+            .then(function (category) {
+                res.redirect('/admin/categories');
+            }, function (err) {
+                res.status(404)
+                    .send(err.message);
+            });
+    },
+
+    getUpdateForm: function (req, res) {
+            services.categories.getById(req.params.id)
+                .then(function (category) {
+                    res.render('categories/editCategory', {category: category});
+                }, function (err) {
+                    res.status(404)
+                        .send(err.message);
+                });
     }
 };

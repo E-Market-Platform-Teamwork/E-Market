@@ -11,4 +11,4 @@ block main-content
             p.ellipsis #{category.description}
          .col-md-3
             p
-               a(href='http://localhost:3000/products/bycategory?category=#{category.name}').btn.btn-primary.pull-right Go
+               a.btn.btn-primary.pull-right(href='/admin/categories/edit/#{category.id}') Edit

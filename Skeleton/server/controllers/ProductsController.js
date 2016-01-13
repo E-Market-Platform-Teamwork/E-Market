@@ -74,7 +74,7 @@ module.exports = {
         console.log(req.body);
         services.products.update(req.params.id, req.body)
             .then(function (product) {
-                res.redirect('/products/' + req.params.id);
+                res.redirect('/admin/products');
             }, function (err) {
                 res.status(404)
                     .send(err.message);
