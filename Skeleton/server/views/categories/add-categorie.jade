@@ -1,7 +1,7 @@
 extends ../shared/layout
 
 block main-content
-    form.form-horizontal(method="post" action="/admin/categories/add")
+    form.form-horizontal(method="post" action="/admin/categories/add").jt-background
         fieldset
         legend Create Category
         .form-group
@@ -13,6 +13,6 @@ block main-content
             .col-lg-8
                 textarea#textArea.form-control(rows='3', name="description", placeholder='Write short description of the category')
         .form-group
-            .col-lg-10.col-lg-offset-3
-            a(href="/admin/categories/add").btn.btn-default Cancel
-            input.btn.btn-primary.buttonMargin(type='submit' value="Create")
+            .col-md-8.pull-left
+                a(href="/admin/categories/add").btn.btn-default Cancel
+                input.btn.btn-primary.buttonMargin(type='submit' value="Create")

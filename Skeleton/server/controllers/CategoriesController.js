@@ -26,16 +26,6 @@ module.exports = function (services) {
             res.render('categories/add-categorie');
         },
 
-        create: function (req, res) {
-            services.categories.create(req.body)
-                .then(function (dat) {
-                    console.log(dat);
-                }, function (err) {
-                    res.status(404)
-                        .send(err);
-                });
-        },
-
         remove: function (req, res) {
             services.categories.removeById(req.query.id)
                 .then(function (dat) {
@@ -45,6 +35,16 @@ module.exports = function (services) {
                     console.log(err.message);
                     res.status(404)
                         .send(err.message);
+                });
+        },
+
+        create: function (req, res) {
+            services.categories.create(req.body)
+                .then(function (dat) {
+                    res.redirect('/admin/categories');
+                }, function (err) {
+                    res.status(404)
+                        .send(err);
                 });
         },
 

@@ -20,7 +20,7 @@ block main-content
                p.ellipsis #{product.description}
             .col-md-3
                p
-                  a.btn.btn-primary.pull-right(href='/admin/products/remove/#{product.id}') Remove
+                  a.btn.btn-default.pull-right(href='/admin/products/remove/#{product.id}') Remove
                   a.btn.btn-primary.pull-right(href='/admin/products/edit/#{product.id}') Edit
       if(!!showPagination)
          +pagination(totalPages)

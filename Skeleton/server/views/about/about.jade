@@ -1,8 +1,9 @@
 extends ../shared/layout
 
 block main-content
-    .jumbotron
-        img(src="#{imageUrl}" style="height: 50px; display: inline-block")
+    .jumbotron.jt-background
         h1 #{info.companyName}
-
-        p  #{info.companyDescription}
+            hr.hr-color
+            p
+                | #{info.companyDescription}
+            img(src="#{imageUrl}" alt="Company image!").center-block.img-design
