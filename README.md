@@ -100,5 +100,31 @@ Basic Functionalities:
             - getById
             - update
             - getLatestTen
-        
+    
+    Models
+        *about
+            - create
+            - findOne
+            - update
+        *categories
+            - create
+            - all
+            - getById
+            - update
+            - getProductsByCategoryId
+        *products
+            - create
+            - all
+            - getById
+            - remove
+            - update
+            - getLatestTen
+        *users
+            - create
+            - update
+    Mongo Collections
+        *Category
+        *Product
+        *Common
+        *Users
     
