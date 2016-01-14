@@ -8,7 +8,7 @@ router
     })
     .get('/',controllers.home.getHomePage)
     .get('*', function (req, res) {
-        res.redirect('/unauthorized');
+        res.render('not-found');
     });
 module.exports = function (app) {
     app.use('/', router);

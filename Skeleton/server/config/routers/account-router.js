@@ -14,7 +14,7 @@ router
         res.render('index', { currentUser: req.user });
     })
     .get('*', function (req, res) {
-        res.render('index', { currentUser: req.user });
+        res.render('not-found');
     });
 
 module.exports = function (app) {

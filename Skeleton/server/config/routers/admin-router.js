@@ -41,7 +41,7 @@ router
     .get('/products/edit/:id', controllers.products.getUpdateForm)
     .post('/products/edit/:id', upload.single('productImage'), controllers.products.update)
     .get('*', function (req, res) {
-        res.render('admin-index');
+        res.redirect('/unauthorized');
     });
 
 module.exports = function (app) {
