@@ -1,7 +1,7 @@
 mixin pagination(totalPages)
-   div(id="page-selection") Pagination goes here
+   div(id="page-selection")
        script.
-           var currentPage = window.location.search.split('=')[1];
+           var currentPage = window.location.search.split('page=')[1] || 1;
            var number
            $('#page-selection').bootpag({
                total: #{totalPages},
@@ -19,6 +19,8 @@ mixin pagination(totalPages)
                lastClass: 'last',
                firstClass: 'first'
            }).on("page", function (event, num) {
-               var url = window.location.pathname + "?page=" + num;
+               var re =/page=.[^&]*&/;
+               var search = window.location.search.replace('?','').split(re).join('');
+               var url = window.location.pathname + "?page=" + num + "&" + search;
                $(location).attr("href", url);
            });

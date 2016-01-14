@@ -4,10 +4,11 @@ var categories = require('../data/products'),
 module.exports = {
     get: function (req, res) {
         var filterString = req.query.filterby || '';
-        services.products.getAll(filterString)
+        var page = req.query.page || 1;
+        services.products.getAll(filterString, page)
             .then(function (dat) {
                 console.log(dat);
-                res.render('products/products', { products: dat });
+                res.render('products/products', {products: dat, totalPages: dat.totalPages, showPagination: true});
             }, function (err) {
                 res
                     .status(404)
@@ -18,7 +19,7 @@ module.exports = {
         services.products.getAll('')
             .then(function (dat) {
                 console.log(dat);
-                res.render('products/productsAdmin', { products: dat });
+                res.render('products/productsAdmin', {products: dat});
             }, function (err) {
                 res
                     .status(404)
@@ -26,8 +27,6 @@ module.exports = {
             });
     },
     add: function (req, res) {
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        console.log(req.body.imageUrl);
         services.products.create(req.body)
             .then(function (dat) {
                 console.log(dat);
@@ -41,7 +40,7 @@ module.exports = {
     getAddForm: function (req, res) {
         services.categories.getAll()
             .then(function (dat) {
-                res.render('products/add-product', { categories: dat });
+                res.render('products/add-product', {categories: dat});
             }, function (err) {
                 res.status(404)
                     .send(err);
@@ -50,7 +49,6 @@ module.exports = {
     remove: function (req, res) {
         services.products.removeById(req.params.id)
             .then(function (dat) {
-                console.log('product removed');
                 res.redirect('/admin/products');
             }, function (err) {
                 console.log(err.message);
@@ -59,11 +57,9 @@ module.exports = {
             });
     },
     getById: function (req, res) {
-        console.log("request parameters >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        console.log(req.params);
         services.products.getById(req.params.id)
             .then(function (product) {
-                res.render('products/details', { product: product });
+                res.render('products/details', {product: product});
             }, function (err) {
                 console.log(err.message);
                 res.status(404)
@@ -71,8 +67,6 @@ module.exports = {
             })
     },
     update: function (req, res) {
-        console.log("_____________REQ BODY___________________");
-        console.log(req.body);
         services.products.update(req.params.id, req.body)
             .then(function (product) {
                 res.redirect('/admin/products');
@@ -83,22 +77,32 @@ module.exports = {
     },
     getUpdateForm: function (req, res) {
         var allCategories;
-        services.categories.getAll().then(function (categories) {
-            allCategories = categories;
-           return services.products.getById(req.params.id)})
-                .then(function (product) {
-                    res.render('products/edit', {product: product, categories: allCategories});
-                }, function (err) {
-                    res.status(404)
-                        .send(err.message);
-                });
+        services.categories.getAll()
+            .then(function (categories) {
+                allCategories = categories;
+                return services.products.getById(req.params.id)
+            })
+            .then(function (product) {
+                res.render('products/edit', {product: product, categories: allCategories});
+            }, function (err) {
+                res.status(404)
+                    .send(err.message);
+            });
     },
     getProductsByCategoryId: function (req, res) {
-        var categoryId = req.params.id;
-        var page = req.query.page;
-        services.categories.getProductsByCategoryId(categoryId, page)
+        var categoryId = req.params.id,
+            page = req.query.page,
+            sortByPrice = req.query.sortByPrice,
+            sortByDate = req.query.sortByDate;
+
+        services.categories.getProductsByCategoryId(categoryId, page, sortByPrice, sortByDate)
             .then(function (category) {
-                res.render('products/products', { products: category.products, totalPages: category.totalPages });
+                res.render('products/products', {
+                    products: category.products,
+                    totalPages: category.totalPages,
+                    categoryId: category.id,
+                    showPagination: true
+                });
             }, function (err) {
                 res.status(404)
                     .send(err.message);

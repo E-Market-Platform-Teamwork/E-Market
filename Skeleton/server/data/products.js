@@ -1,19 +1,24 @@
 var Product = require('mongoose').model('Product');
-
+const PROJECTS_PER_PAGE = 6;
 module.exports = {
     create: function (product, callback) {
         Product.create(product, callback);
     },
-    all: function (filterString, callback) {
+    all: function (filterString, page, callback) {
+        var skip = PROJECTS_PER_PAGE * (page - 1);
         Product
-            .find({'name': new RegExp('.*' + filterString + '.*', 'i')})
+            .find({'name': new RegExp('.*' + filterString + '.*', 'i')},{},{limit: PROJECTS_PER_PAGE, skip: skip})
             .populate('categories')
             .exec(function (err, done) {
                 if (err) {
                     return callback(err);
                 }
+                Product.count({}, function(err, count){
+                    console.log("Count is "+ count);
+                    done.totalPages = ((count/PROJECTS_PER_PAGE)|0) + 1;
+                    callback(null, done);
+                });
 
-                callback(null, done);
             });
     },
     remove: function (product, callback) {

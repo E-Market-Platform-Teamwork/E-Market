@@ -6,6 +6,22 @@ block main-content
         .input-group-btn
             button.btn.btn-default(type='submit') Search
     hr
+    if(categoryId)
+        form(method="get" action="./#{categoryId}")
+            .form-group
+                label(for='sortByDate') SortByDate:
+                select#sortByDate.form-control(name='sortByDate')
+                    option(selected)
+                    option(value='asc') ASC
+                    option(value='desc') DESC
+            .form-group
+                label(for='sortByPrice') SortByPrice:
+                select#sortByPrice.form-control(name='sortByPrice')
+                    option(selected)
+                    option(value='asc') ASC
+                    option(value='desc') DESC
+            button.btn.btn-default(type='submit') Filter
+    hr
     .row.text-center
         each product in products
             .col-md-3.col-sm-6.hero-feature
@@ -16,5 +32,5 @@ block main-content
                         p.ellipsis #{product.description}
                         p
                             a.btn.btn-default(href='/products/#{product.id}') View
-    if(!!totalPages)
+    if(!!showPagination)
         +pagination(totalPages)

@@ -1,9 +1,9 @@
 var products = require('../../data/products');
 
 module.exports = {
-    getAll: function (filterString) {
+    getAll: function (filterString, page) {
         var promise = new Promise(function (resolve, reject) {
-            products.all(filterString, function (err, done) {
+            products.all(filterString, page, function (err, done) {
                 if (err) {
                     reject(err);
                 }
@@ -66,10 +66,7 @@ module.exports = {
     },
     update: function (id, product) {
         var promise = new Promise(function (resolve, reject) {
-
             products.update(id, product, function (err, product) {
-                console.log("_________________product updated______________________________");
-                console.log(product);
                 if (err) {
                     reject(new Error('Invalid product id!'));
                 } else {
