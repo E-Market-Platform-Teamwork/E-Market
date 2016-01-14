@@ -1,11 +1,18 @@
 extends ../shared/layout
 
 block main-content
-   .jumbotron
-      img(src="imageUrl" style="height: 50px; display: inline-block")
-      h1 #{info.companyName}
-
-      p  #{info.companyDescription}
-
-      a(href='about/edit') Edit
+   .row.alert-success.h4
+      .col-md-1 Image
+      .col-md-3 Name
+      .col-md-5 Description
+   .row.thumbnail
+      .thumbnail.col-md-1
+         img(src='#{imageUrl}', alt='')
+      .col-md-3
+         h3.cutText #{info.companyName}
+      .col-md-5
+         h4.cutText #{info.companyDescription}
+      .col-md-3
+         p
+            a.btn.btn-primary.pull-right(href='about/edit') Edit
 
