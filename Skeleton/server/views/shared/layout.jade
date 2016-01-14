@@ -46,7 +46,9 @@ html
                             if (currentUser)
                                 if(currentUser.roles === 'admin')
                                     li
-                                        a(href="/admin") Administration
+                                        a(href="/admin/categories/add") Add Category
+                                    li
+                                        a(href="/admin/products/add") Add Product
                                 li
                                     a(href="/account/profile") #{currentUser.username}
                                 li

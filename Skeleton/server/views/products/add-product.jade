@@ -1,37 +1,35 @@
 extends ../shared/layout
 block main-content
-    form.form-horizontal(method="post" action="/admin/products/add" enctype="multipart/form-data")
+    form.form-horizontal(method="post" action="/admin/products/add" enctype="multipart/form-data").jt-background
         fieldset
         legend Create Product
         .form-group
-            label.col-lg-2.control-label(for='name') Name
-            .col-lg-10
-            input#name.form-control(type='text', placeholder='Name', name="name")
+            label.col-lg-1.control-label(for='name') Name
+            .col-md-8
+                input#name.form-control(type='text', placeholder='Name', name="name")
         .form-group
-            label.col-lg-2.control-label(for='textArea') Description
-            .col-lg-10
-            textarea#textArea.form-control(rows='3', name="description")
-            span.help-block
-                | Write short description of the product.
+            label.col-lg-1.control-label(for='textArea') Description
+            .col-md-8
+                textarea#textArea.form-control(rows='3', name="description")
         .form-group
-            label.col-lg-2.control-label(for='price') Price
-            .col-lg-10
-            input#price.form-control(type='number', placeholder='Price', name="price")
+            label.col-lg-1.control-label(for='price') Price
+            .col-md-8
+                input#price.form-control(type='number', placeholder='Price', name="price")
         .form-group
-            label.col-lg-2.control-label(for='quantity') Quantity
-            .col-lg-10
-            input#quantity.form-control(type='number', placeholder='Quantity', name="quantity")
+            label.col-lg-1.control-label(for='quantity') Quantity
+            .col-md-8
+                input#quantity.form-control(type='number', placeholder='Quantity', name="quantity")
         .form-group
-           label.col-lg-2.control-label(for='categories') Categories
-           .col-lg-10
-           select(name="categories")
-               each category in categories
-                   option(value='#{category.id}') #{category.name}
+           label.col-lg-1.control-label(for='categories') Categories
+           .col-md-8.pull-left
+            select(name="categories")
+                each category in categories
+                    option(value='#{category.id}') #{category.name}
         .form-group
-            label.col-lg-2.control-label(for='productImage') Image
-            .col-lg-10
-            input#productImage.form-control(type='file', name='productImage')
+            label.col-lg-1.control-label(for='productImage') Image
+            .col-md-8
+                input#productImage.form-control(type='file', name='productImage')
         .form-group
-            .col-lg-10.col-lg-offset-2
-            a(href="/admin/products/add").btn.btn-default Cancel
-            input.btn.btn-primary(type='submit' value="Create")
+            .col-md-8.pull-left
+                a(href="/admin/products/add").btn.btn-default Cancel
+                input.btn.btn-primary.buttonMargin(type='submit' value="Create")

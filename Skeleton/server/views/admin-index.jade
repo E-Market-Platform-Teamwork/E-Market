@@ -3,11 +3,7 @@ block main-content
    h1 Administration Panel
    .container
       .leftContainer
-         ul
-            li
-               a(href="/admin/categories/add") Add Category
-            li
-               a(href="/admin/products/add") Add Product
+
       .rightContainer
          if (errorMessage)
             .alert.alert-danger #{errorMessage}
