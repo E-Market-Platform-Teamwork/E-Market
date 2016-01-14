@@ -14,7 +14,6 @@ module.exports = {
                     return callback(err);
                 }
                 Product.count({}, function(err, count){
-                    console.log("Count is "+ count);
                     done.totalPages = ((count/PROJECTS_PER_PAGE)|0) + 1;
                     callback(null, done);
                 });

@@ -7,7 +7,6 @@ module.exports = {
         var page = req.query.page || 1;
         services.products.getAll(filterString, page)
             .then(function (dat) {
-                console.log(dat);
                 res.render('products/products', {products: dat, totalPages: dat.totalPages, showPagination: true});
             }, function (err) {
                 res
@@ -18,7 +17,6 @@ module.exports = {
     getAuthenticated: function (req, res) {
         services.products.getAll('')
             .then(function (dat) {
-                console.log(dat);
                 res.render('products/productsAdmin', {products: dat});
             }, function (err) {
                 res
@@ -29,7 +27,6 @@ module.exports = {
     add: function (req, res) {
         services.products.create(req.body)
             .then(function (dat) {
-                console.log(dat);
                 res.status(201);
                 res.redirect("/admin/products");
             }, function (err) {
