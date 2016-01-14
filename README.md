@@ -43,6 +43,56 @@ Basic Functionalities:
             - All logged users will be able to change their passowrds
         *Chat
             - All visiters are able to post messages and comunicate with each other
+            
+    Routers
+        *about-router
+            - get('/')
+            - in all other cases not-found
+        *account
+            - get('/register', usersController.getRegister)
+            - post('/register', usersController.postRegister)
+            - get('/login', usersController.getLogin)
+            - post('/login', auth.login)
+            - get('/logout', auth.logout)
+            - get('/profile', usersController.getProfile)
+            - post('/profile', usersController.updateProfile)
+            - get('/')
+            - in all other cases not-found
+        *admin
+            - get('/')
+            - get('/categories', controllers.categories.getAuthenticated)
+            - get('/categories/add', controllers.categories.getAddCategory)
+            - post('/categories/add', controllers.categories.create)
+            - delete('/categories/remove', controllers.categories.remove)
+            - get('/categories/manage', controllers.categories.getManage)
+            - get('/categories/edit/:id', controllers.categories.getUpdateForm)
+            - post('/categories/edit/:id', controllers.categories.update)
+            - get('/about', controllers.about.getAboutAuthenticated)
+            - get('/about/edit', controllers.about.getEdit)
+            - post('/about', controllers.about.edit)
+            - post('/about/uploadImage', controllers.about.uploadImage)
+            - get('/products', controllers.products.getAuthenticated)
+            - get('/products/remove/:id', controllers.products.remove)
+            - post('/products/add', upload.single('productImage'), controllers.products.add)
+            - get('/products/add', controllers.products.getAddForm)
+            - get('/products/edit/:id', controllers.products.getUpdateForm)
+            - post('/products/edit/:id', upload.single('productImage'), controllers.products.update)
+            - in the cases when there is no logged user - redirects to login-page
+            - in case when user is logged, but he/she is not admin - unauthorized
+        *categories-router
+            - get('/', controllers.categories.get)
+            - in all other cases not-found
+        *chat-router
+            - get('/', controllers.chat.get)
+            - in all other cases not-found
+        *home-router
+            - get('/',controllers.home.getHomePage)
+            - in all other cases not-found
+        *products-router
+            - get('/', controllers.products.get)
+            - get('/bycategory/:id', controllers.products.getProductsByCategoryId)
+            - get('/:id', controllers.products.getById)
+            - in all other cases not-found
     
     Controllers:
         *AboutController
