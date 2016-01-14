@@ -7,6 +7,6 @@ block main-content
                 p
                     | #{product.description}
                 img(src="#{product.imageUrl}" alt="Poduct image!")
-                h2 #{product.price}
+                h2 Price: #{product.price}.00
                 h2 #{product.quality}
                 h2 Published date: #{moment(product.dateUpdated).format('LLL')}            
