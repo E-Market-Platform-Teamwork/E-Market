@@ -30,7 +30,7 @@ module.exports = {
     create: function (req, res) {
         services.categories.create(req.body)
             .then(function (dat) {
-                console.log(dat);
+                res.redirect('/admin/categories');
             }, function (err) {
                 res.status(404)
                     .send(err);
