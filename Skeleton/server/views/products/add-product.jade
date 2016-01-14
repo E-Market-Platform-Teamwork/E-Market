@@ -28,7 +28,7 @@ block main-content
         .form-group
             label.col-lg-1.control-label(for='productImage') Image
             .col-md-8
-                input#productImage.form-control(type='file', name='productImage')
+                input#productImage.form-control(type='file', name='productImage', accept='.jpg,.bmp,.png')
         .form-group
             .col-md-8.pull-left
                 a(href="/admin/products/add").btn.btn-default Cancel
