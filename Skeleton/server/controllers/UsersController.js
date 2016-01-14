@@ -1,10 +1,7 @@
-var encryption = require('../utilities/encryption'),
-    users = require('../data/users'),
-    encryption = require('../utilities/encryption');
 
 var CONTROLLER_NAME = 'users';
 
-module.exports = {
+module.exports = function(encription, users) { return{
     getRegister: function (req, res, next) {
         res.render(CONTROLLER_NAME + '/register')
     },
@@ -55,4 +52,5 @@ module.exports = {
             });
         }
     }
+}
 };

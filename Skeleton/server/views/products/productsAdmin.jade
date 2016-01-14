@@ -1,5 +1,11 @@
 extends ../shared/layout
+include ../mixins/pager-mixin
 block main-content
+      form(method="get" action="/admin/products").input-group.col-md-4
+         input.form-control(type='text', placeholder='Filter by name', name='filterby')
+         .input-group-btn
+            button.btn.btn-default(type='submit') Search
+      hr
       .row.alert-success.h4
          .col-md-1 Image
          .col-md-3 Name
@@ -16,3 +22,5 @@ block main-content
                p
                   a.btn.btn-primary.pull-right(href='/admin/products/remove/#{product.id}') Remove
                   a.btn.btn-primary.pull-right(href='/admin/products/edit/#{product.id}') Edit
+      if(!!showPagination)
+         +pagination(totalPages)
