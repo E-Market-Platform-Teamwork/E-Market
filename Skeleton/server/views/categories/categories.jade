@@ -1,12 +1,12 @@
 extends ../shared/layout
 
 block main-content
-    ul.nav.nav-pills
-    each category in categories
-        li
-            .jumbotron
-                h1 #{category.name}
-                p
-                    | #{category.description}
-                p
-                    a(href='/products/bycategory/#{category.id}').btn.btn-primary.btn-lg Go
+    .row
+        .col-sm-12
+            .row
+                each category in categories
+                    .col-md-3
+                        .well
+                            h4
+                                span.label.label-primary.pull-right #{category.products.length}
+                                a.text-primary(href='/products/bycategory/#{category.id}') #{category.name}
